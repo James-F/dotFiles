@@ -1,0 +1,61 @@
+#
+# Use it without acknowledgement, it's mostly nicked anyway.
+#
+#       James Fletcher <j.fletcher@unix.net>
+#       www.ultrahertz.com
+#
+
+password <enter hash here>
+startup_message off
+vbell on
+defscrollback 20000
+autodetach on
+logfile /home/username/logs/screen_%Y-%m-%d_%0c
+
+# theme stuff
+hardstatus on
+hardstatus alwayslastline
+hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %m/%d/%y | %C:%s %A | %1`%{-}'
+
+## output buffer hack for xterm
+#
+#termcapinfo xterm* OL=10000
+term rxvt-256color
+
+# for mutt
+#defbce on
+#term screen-bce
+
+# unbinds
+bind ^\
+bind \\
+bind ^h
+bind k
+bind ^k
+bind .
+bind h
+
+# rebind
+bind 'O' login off
+bind 'I' login on
+bind 'K' kill
+bind '}' history
+
+# Prepend/append register [/] to the paste if ^a^] is pressed.
+# This lets me have autoindent mode in vi.
+register [ "33:se noai15a"
+register ] "33:se ai15a"
+bind ^] paste [.]
+
+# my preferences / stuff.
+altscreen on
+bind R source $HOME/.screenrc
+
+screen -t stats 0 htop
+screen -t irc 1 irssi
+screen -t mail 2 mutt
+screen -t system 3 bash
+screen -t prog 4 bash
+screen -t conf 5 bash
+select 1
+
